@@ -8,13 +8,14 @@ import java.sql.SQLException;
 import net.javaguides.todoapp.model.LoginBean;
 import net.javaguides.todoapp.utils.JDBCUtils;
 
+
 public class LoginDao {
 
 	public boolean validate(LoginBean loginBean) throws ClassNotFoundException {
 		boolean status = false;
 		try (Connection connection = JDBCUtils.getConnection();
-				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection
+			 // Step 2:Create a statement using connection object
+			 PreparedStatement preparedStatement = connection
 						.prepareStatement("select * from users where username = ? and password = ? ")) {
 			preparedStatement.setString(1, loginBean.getUsername());
 			preparedStatement.setString(2, loginBean.getPassword());

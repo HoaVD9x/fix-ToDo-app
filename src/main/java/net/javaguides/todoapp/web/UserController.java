@@ -25,7 +25,7 @@ public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Session session;
 
-	Transaction transaction;
+	Transaction transaction; // su dung khi ghi du lieu lên mariaDB
 
 	@Override
 	public void init() {

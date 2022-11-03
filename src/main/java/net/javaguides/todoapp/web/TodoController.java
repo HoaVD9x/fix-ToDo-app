@@ -12,9 +12,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import jdk.jfr.internal.SecuritySupport;
+//import net.javaguides.todoapp.dao.ToDoWithHibernate;
+import net.javaguides.todoapp.dao.ToDoWithHibernate;
 import net.javaguides.todoapp.dao.TodoDao;
-import net.javaguides.todoapp.dao.TodoDaoImpl;
+
+
+
 import net.javaguides.todoapp.model.Todo;
+import net.javaguides.todoapp.utils.HibernateUtil;
+import org.hibernate.Session;
 
 /**
  * ControllerServlet.java This servlet acts as a page controller for the
@@ -26,10 +33,17 @@ import net.javaguides.todoapp.model.Todo;
 @WebServlet("/")
 public class TodoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private TodoDao todoDAO;
+	private TodoDao todoDAO = new ToDoWithHibernate();
 
+
+
+	Session session;
 	public void init() {
-		todoDAO = new TodoDaoImpl();
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+		} catch ( Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

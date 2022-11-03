@@ -35,7 +35,7 @@ public class Todo {
 	@Column(name="is_done")
 	private boolean status;
 	
-	protected Todo() {
+	public Todo() {
 		
 	}
 	
@@ -127,4 +127,6 @@ public class Todo {
 			return false;
 		return true;
 	}
+
+
 }
